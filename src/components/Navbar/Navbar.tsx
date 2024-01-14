@@ -147,7 +147,8 @@ function NavbarUser() {
                     Записи пользователей { applicationsAllCount > 0 ? 
                     applicationsAllCount : <></> }
                   </Nav.Link>
-                  <Nav.Link className='navbar__item text-base2-medium'>
+                  <Nav.Link onClick={() => navigate('/kingdom_moderator')}
+                  className='navbar__item text-base2-medium'>
                     Все княжества
                   </Nav.Link>
                 </>

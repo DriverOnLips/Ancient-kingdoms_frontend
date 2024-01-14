@@ -12,6 +12,7 @@ import ApplicationFeed from './pages/ApplicationsFeed/ApplicationsFeed';
 import ApplicationPage from './pages/ApplicationPage/ApplicationPage';
 import Loader from './components/UI/Loader/Loader';
 import ModeratorApplicationFeed from './pages/ModeratorApplicationsFeed/ModaratorApplicationFeed';
+import ModeratorKingdomsFeed from './pages/ModeratorKingdomsFeed/ModeratorKingdomsFeed';
 
 
 const App: React.FC = () => {
@@ -36,10 +37,11 @@ const App: React.FC = () => {
         <Route path="/kingdom" element={<KingdomsFeed />} />
         <Route path="/kingdom/:id" element={<KingdomPage />} />              
         <Route path="/application" element={<ApplicationFeed />} />
-        <Route path="/application/:id" element={<ApplicationPage  isModerator={isModerator}/>} />              
+        <Route path="/application/:id" element={<ApplicationPage />} />              
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/application_moderator" element={<ModeratorApplicationFeed />} />
+        <Route path="/kingdom_moderator" element={<ModeratorKingdomsFeed />} />
       </Routes>
     </BrowserRouter>
   )
