@@ -1,3 +1,6 @@
+.table_kingdom_header__item {
+  cursor: pointer;
+}
 
 .table_kingdom_header__header__image {
   width: 200px;

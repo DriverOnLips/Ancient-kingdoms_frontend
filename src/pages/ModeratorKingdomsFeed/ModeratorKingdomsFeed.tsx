@@ -5,13 +5,16 @@ import { useKingdom } from "../../hooks/useKingdom";
 import { useApp } from "../../hooks/useApp";
 import Loader from "../../components/UI/Loader/Loader";
 import MyModal from "../../components/UI/Modal/Modal";
-import { errorMatching } from "../../utils/errorMatching/errorMatching";
+import { errorMatching } from "../../utils/namesMatching/errorMatching";
 import { Kingdom } from "../../Interfaces/dataStructures/KingdomInterface";
 import KingdomItem from "../../components/KingdomItem/KingdomItem";
 import TableKingdomHeader from "../../components/UI/Tables/KingdomHeader/TableKingdomHeader";
+import { useNavigate } from "react-router-dom";
 
 
 const ModeratorKingdomsFeed: React.FC = () => {
+  const navigate = useNavigate();
+
   const [modalShow, setModalShow] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
   const [modalText, setModalText] = useState('');
@@ -99,7 +102,7 @@ const ModeratorKingdomsFeed: React.FC = () => {
                 <span className="text-h2-medium">
                   Выберите княжество для редактирования
                 </span>
-                <Button>
+                <Button onClick={() => navigate('/kingdom_add')}>
                   Добавить новое княжество
                 </Button>
               </Col>

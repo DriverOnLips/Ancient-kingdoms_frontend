@@ -12,7 +12,7 @@ import ApplicationItem from "../../components/ApplicationItem/ApplicationItem";
 import { Application } from "../../Interfaces/dataStructures/ApplicationInterface";
 import { useApplication } from "../../hooks/useApplication";
 import { useApp } from "../../hooks/useApp";
-import { errorMatching } from "../../utils/errorMatching/errorMatching";
+import { errorMatching } from "../../utils/namesMatching/errorMatching";
 import { ApplicationFeedStatusFilterSelector } from "../../components/UI/Selector/ApplicationStatusSelector";
 
 

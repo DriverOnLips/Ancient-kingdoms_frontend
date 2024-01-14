@@ -8,7 +8,7 @@ import MyModal from "../../components/UI/Modal/Modal";
 import Loader from "../../components/UI/Loader/Loader";
 import KingdomItem from "../../components/KingdomItem/KingdomItem";
 import { useApp } from "../../hooks/useApp";
-import { errorMatching } from "../../utils/errorMatching/errorMatching";
+import { errorMatching } from "../../utils/namesMatching/errorMatching";
 
 
 const ApplicationPage: React.FC = () => {

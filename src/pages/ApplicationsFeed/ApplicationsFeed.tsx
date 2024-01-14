@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Application } from "../../Interfaces/dataStructures/ApplicationInterface";
 import ApplicationItem from "../../components/ApplicationItem/ApplicationItem";
 import { useApp } from "../../hooks/useApp";
-import { errorMatching } from "../../utils/errorMatching/errorMatching";
+import { errorMatching } from "../../utils/namesMatching/errorMatching";
 
 
 const ApplicationFeed: React.FC = () => {

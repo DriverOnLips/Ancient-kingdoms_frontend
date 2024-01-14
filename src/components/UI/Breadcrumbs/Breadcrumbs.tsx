@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 
-import { nameMatching } from './nameMatching';
+import { nameMatching } from '../../../utils/namesMatching/nameMatching';
 
 
 function Breadcrumbs() {

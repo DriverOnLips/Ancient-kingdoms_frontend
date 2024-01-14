@@ -75,9 +75,21 @@ export const KingdomStatusSelector: React.FC<{kingdomId: number, defaultValue: s
   }
 
   return (
-    <Form.Select defaultValue={defaultValue} 
+    <Form.Select onClick={event => event.stopPropagation()}
+    className="kingdom_status_selector" defaultValue={defaultValue} 
     onChange={(event) => handleStatusChange(event.target.value)}>
       <option value="" disabled hidden>Выберите новый статус княжества</option>
+      <option value="Данные подтверждены">Данные подтверждены</option>
+      <option value="Данные утеряны">Данные утеряны</option>
+    </Form.Select>
+  );
+}
+
+export const KingdomCreateStatusSelector: React.FC = () => {
+  return (
+    <Form.Select onClick={event => event.stopPropagation()}
+    className="kingdom_status_selector" defaultValue={""}>
+      <option value="" disabled>Выберите статус княжества</option>
       <option value="Данные подтверждены">Данные подтверждены</option>
       <option value="Данные утеряны">Данные утеряны</option>
     </Form.Select>

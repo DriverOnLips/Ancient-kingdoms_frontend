@@ -7,7 +7,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { SignupCarousel } from "../../components/UI/Carousel/Carousel";
 import MyModal from "../../components/UI/Modal/Modal";
 import { useApp } from "../../hooks/useApp";
-import { errorMatching } from "../../utils/errorMatching/errorMatching";
+import { errorMatching } from "../../utils/namesMatching/errorMatching";
 
 
 const SignupPage: React.FC = () => {

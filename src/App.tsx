@@ -13,6 +13,7 @@ import ApplicationPage from './pages/ApplicationPage/ApplicationPage';
 import Loader from './components/UI/Loader/Loader';
 import ModeratorApplicationFeed from './pages/ModeratorApplicationsFeed/ModaratorApplicationFeed';
 import ModeratorKingdomsFeed from './pages/ModeratorKingdomsFeed/ModeratorKingdomsFeed';
+import ModeratorAddAndEditKingdom from './pages/ModeratorAddAndEditKingdom/ModeratorAddAndEditKingdom';
 
 
 const App: React.FC = () => {
@@ -35,13 +36,15 @@ const App: React.FC = () => {
       <NavbarUser />
       <Routes>
         <Route path="/kingdom" element={<KingdomsFeed />} />
-        <Route path="/kingdom/:id" element={<KingdomPage />} />              
+        <Route path="/kingdom/:id" element={<KingdomPage />} />      
         <Route path="/application" element={<ApplicationFeed />} />
         <Route path="/application/:id" element={<ApplicationPage />} />              
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/application_moderator" element={<ModeratorApplicationFeed />} />
         <Route path="/kingdom_moderator" element={<ModeratorKingdomsFeed />} />
+        <Route path="/kingdom_add/" element={<ModeratorAddAndEditKingdom add={false} />} />      
+        <Route path="/kingdom_edit/:id" element={<ModeratorAddAndEditKingdom add={true} />} />      
       </Routes>
     </BrowserRouter>
   )

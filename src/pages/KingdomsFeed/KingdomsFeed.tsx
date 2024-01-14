@@ -7,7 +7,7 @@ import Loader from '../../components/UI/Loader/Loader';
 import { useKingdom } from '../../hooks/useKingdom';
 import MyModal from '../../components/UI/Modal/Modal';
 import { useApp } from '../../hooks/useApp';
-import { errorMatching } from '../../utils/errorMatching/errorMatching';
+import { errorMatching } from '../../utils/namesMatching/errorMatching';
 
 
 const KingdomsFeed: React.FC = () => {

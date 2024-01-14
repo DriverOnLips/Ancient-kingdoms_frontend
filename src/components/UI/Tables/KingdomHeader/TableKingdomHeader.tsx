@@ -1,9 +1,13 @@
+import { useNavigate } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
+
 import { Kingdom } from '../../../../Interfaces/dataStructures/KingdomInterface';
 import { KingdomStatusSelector } from '../../Selector/KingdomStatusSelector';
 
 
 function TableKingdomHeader({ kingdoms } : {kingdoms: Kingdom[]} ) {
+  const navigate = useNavigate();
+
   return (
     <Table striped bordered hover>
       <thead>
@@ -18,7 +22,9 @@ function TableKingdomHeader({ kingdoms } : {kingdoms: Kingdom[]} ) {
       </thead>
       <tbody>
         {kingdoms?.map((kingdom: Kingdom) => (
-          <tr key={kingdom.Id}>
+          <tr key={kingdom.Id} 
+          onClick={() => navigate(`/kingdom_edit/${kingdom.Id}`)}
+          className='table_kingdom_header__item'>
             <td>{kingdom.Id}</td>
             <td>{kingdom.Name}</td>
             <td className='table_kingdom_header__record__image'>
