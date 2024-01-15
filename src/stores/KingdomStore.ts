@@ -24,8 +24,23 @@ export const kingdomSlice = createSlice({
     DeleteKingdom: (state) => {
       state.kingdom = null;
     },
+    UpdateKingdomStatus: (state, action: PayloadAction<{id: number, state: string}>) => {
+      state.kingdoms = state.kingdoms.map((kingdom: Kingdom) => {
+        if (kingdom.Id != action.payload.id) {
+          return kingdom;
+        } else {
+          const updatedKingdom: Kingdom = {...kingdom};
+          updatedKingdom.Id = action.payload.id;
+          updatedKingdom.State = action.payload.state;
+          return updatedKingdom;
+        }
+      });
+    }
   },
 });
 
-export const { SetKingdoms, SetKingdom, DeleteKingdom } = kingdomSlice.actions;
+export const { SetKingdoms,
+  SetKingdom,
+  DeleteKingdom,
+  UpdateKingdomStatus } = kingdomSlice.actions;
 export const kingdomReducer = kingdomSlice.reducer;

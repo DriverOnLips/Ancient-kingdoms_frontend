@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Button, Form, Container, Row, Image, Col, ModalTitle } from 'react-bootstrap';
+import { Button, Form, Container, Row, Image, Col, ModalTitle, InputGroup } from 'react-bootstrap';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -8,8 +8,8 @@ import { useKingdom } from '../../hooks/useKingdom';
 import Loader from "../../components/UI/Loader/Loader";
 import MyModal from "../../components/UI/Modal/Modal";
 import { useApp } from "../../hooks/useApp";
-import { useAuth } from "../../hooks/useAuth";
-import { KingdomCreateStatusSelector } from "../../components/UI/Selector/KingdomStatusSelector";
+import { KingdomCreateStatusSelector, KingdomStatusSelector } from "../../components/UI/Selector/KingdomStatusSelector";
+import { Kingdom } from "../../Interfaces/dataStructures/KingdomInterface";
 
 
 const ModeratorAddAndEditKingdom: React.FC<{ add: boolean }> = ({ add }) => {
@@ -22,11 +22,20 @@ const ModeratorAddAndEditKingdom: React.FC<{ add: boolean }> = ({ add }) => {
   const [modalSaveText, setModalSaveText] = useState('');
   const [modalHandleSaveMode, setModalHandleSaveMode] = useState<Number | null>(null);
 
+  const [kingdomName, setKingdomName] = useState('');
+  const [kingdomArea, setKingdomArea] = useState<number | null>(null);
+  const [kingdomCapital, setKingdomCapital] = useState('');
+  const [kingdomImage, setKingdomImage] = useState('');
+  const [kingdomDescription, setKingdomDescription] = useState('');
+  const [kingdomStatus, setKingdomStatus] = useState('');
+  
   const [isLoaded, setIsLoaded] = useState(false); 
 
-  const { isAuthorized, isModerator } = useAuth();
- 
-  const { kingdom, setKingdom, deleteKingdom } = useKingdom();
+  const { kingdom, 
+    setKingdom, 
+    deleteKingdom, 
+    updateKingdom,
+    createKingdom } = useKingdom();
 
   const { setCurrentPage, deleteCurrentPage } = useApp();
 
@@ -34,15 +43,160 @@ const ModeratorAddAndEditKingdom: React.FC<{ add: boolean }> = ({ add }) => {
 
   const navigate = useNavigate();
 
-  const updateKingdom = () => {
+  const [preview, setPreview] = useState('');
+
+  const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const image = event.target.files ? event.target.files[0] : null;
+
+    if (!image) return;
+   
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const base64String = 'data:image/png;base64,' + 
+                            reader.result?.toString().split(',')[1];
+      setKingdomImage(base64String ? base64String : '');
+
+      setPreview((reader.result as string) || '');
+    };
     
+    reader.readAsDataURL(image);
+
+  };
+
+  const handleKingdomStatusSelectorChange = (selectedValue: string) => {
+    setKingdomStatus(selectedValue);
+  };
+   
+  const checkAndCreateKingdom = () => {
+    if (!( kingdomName && kingdomArea && kingdomCapital &&
+           kingdomImage && kingdomDescription && kingdomStatus !== '' )) {
+
+      setModalTitle('Ошибка');
+      setModalText('Заполните все поля');
+      setModalError('');
+      setModalCanselText('Закрыть');
+      setModalVariant('');
+      setModalShow(true);
+
+      return;
+    }
+
+    const kingdomToCreate: Kingdom = {
+      Id: 0,
+      Name: kingdomName,
+      Area: kingdomArea,
+      Capital: kingdomCapital,
+      Image: kingdomImage,
+      Description: kingdomDescription,
+      State: kingdomStatus,
+    };
+
+    createKingdom(kingdomToCreate)
+      .then(result => {
+        if (!result.result) {
+          setModalTitle('Ошибка');
+          setModalText('Детали ошибки');
+          setModalError(result.response?.Message!);
+          setModalCanselText('Закрыть');
+          setModalVariant('');
+          setModalShow(true);
+
+          return;
+        }
+
+        setModalTitle('Княжество успешно добавлено'); // добавить переход
+        setModalText('')
+        setModalError('');
+        setModalCanselText('');
+        setModalSaveText('');
+        setModalVariant('withProgress');
+        setModalShow(true);
+      })
+      .catch(error => {
+        setModalTitle('Ошибка');
+        setModalText('Детали ошибки');
+        setModalError(error);
+        setModalCanselText('Закрыть');
+        setModalVariant('');
+        setModalShow(true);
+      });
+   
+  }
+
+
+  const checkAndUpdateKingdom = () => {
+    if (!( kingdom.Id && kingdomName && kingdomArea && kingdomCapital &&
+           kingdom.Image && kingdomDescription && kingdom.State )) {
+
+      setModalTitle('Ошибка');
+      setModalText('Заполните все поля');
+      setModalError('');
+      setModalCanselText('Закрыть');
+      setModalVariant('');
+      setModalShow(true);
+
+      return;
+    }
+
+    const updatedKingdom: Kingdom = {
+      Id: kingdom.Id,
+      Name: kingdomName,
+      Area: kingdomArea,
+      Capital: kingdomCapital,
+      Image: kingdom.Image,
+      Description: kingdomDescription,
+      State: kingdom.State,
+    };
+
+    updateKingdom(updatedKingdom)
+      .then(result => {
+        if (!result.result) {
+          setModalTitle('Ошибка');
+          setModalText('Детали ошибки');
+          setModalError(result.response?.Message!);
+          setModalCanselText('Закрыть');
+          setModalVariant('');
+          setModalShow(true);
+
+          return;
+        }
+
+        setModalTitle('Княжество успешно изменено');
+        setModalText('')
+        setModalError('');
+        setModalCanselText('');
+        setModalSaveText('');
+        setModalVariant('withProgress');
+        setModalShow(true);
+      })
+      .catch(error => {
+        setModalTitle('Ошибка');
+        setModalText('Детали ошибки');
+        setModalError(error);
+        setModalCanselText('Закрыть');
+        setModalVariant('');
+        setModalShow(true);
+      });
    
   }
 
   useEffect(() => {
+    if (!kingdom) {
+      return;
+    }
+
+    setKingdomName(kingdom.Name);
+    setKingdomArea(kingdom.Area);
+    setKingdomCapital(kingdom.Capital);
+    // setKingdomImage(kingdom.Image);
+    setKingdomDescription(kingdom.Description);
+  }, [kingdom])
+
+  useEffect(() => {
     switch (add) {
-      case true:
-        setCurrentPage('Просмотр княжества');
+      case false:
+        setCurrentPage('Изменение княжества');
 
         if (!/^\d+$/.test(id!)) {
           setModalTitle('Ошибка');
@@ -68,7 +222,7 @@ const ModeratorAddAndEditKingdom: React.FC<{ add: boolean }> = ({ add }) => {
     
                 return;
               }
-              
+
               setIsLoaded(true);
             })
             .catch(error => {
@@ -85,7 +239,7 @@ const ModeratorAddAndEditKingdom: React.FC<{ add: boolean }> = ({ add }) => {
         
         break;
       default:
-        setCurrentPage('Добавление княжества ');
+        setCurrentPage('Добавление княжества');
 
         setIsLoaded(true);
         
@@ -127,42 +281,52 @@ const ModeratorAddAndEditKingdom: React.FC<{ add: boolean }> = ({ add }) => {
     );
   }
 
-  if (add) {
+  if (!add) {
     return (
       <div className="kingdom-page">
         <div className="kingdom" style={{ marginTop: '56px'}}>
           <div className="kingdom__title mt-4 text-base1-medium">
-            <h2>{kingdom.Name}</h2>
+            <h2>{kingdomName}</h2>
           </div>
           <Container>
             <Row style={{ justifyContent: 'center' }}>
               <Col xs={4}>
-                <Image src={kingdom.Image} alt={kingdom.Name} style={{ width: '100%' }} rounded />
+                <Image src={kingdom.Image} alt={kingdomName} style={{ width: '100%' }} rounded />
               </Col>
               <Col xs={4}>
                 <Form>
+                <Form.Group className="mb-3" controlId="kingdomArea">
+                    <Form.Label>Название</Form.Label>
+                    <Form.Control 
+                    onChange={event => setKingdomName(event.target.value)}
+                    type="text" 
+                    value={kingdomName} />
+                  </Form.Group>
                   <Form.Group className="mb-3" controlId="kingdomArea">
                     <Form.Label>Площадь</Form.Label>
-                    <Form.Control type="text" 
-                    disabled = {!isModerator} 
-                    value={kingdom.Area} />
+                    <Form.Control 
+                    type="number" 
+                    onChange={event => setKingdomArea(Number(event.target.value))}
+                    value={kingdomArea ? kingdomArea : 0} />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="kingdomCapital">
                     <Form.Label>Столица</Form.Label>
-                    <Form.Control type="text"
-                    disabled = {!isModerator}
-                    value={kingdom.Capital} />
+                    <Form.Control 
+                    type="text"
+                    onChange={event => setKingdomCapital(event.target.value)}
+                    value={kingdomCapital} />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="kingdomDescription">
                     <Form.Label>О княжестве</Form.Label>
                     <Form.Control as="textarea" rows={3} 
-                    type="text" disabled = {!isModerator} 
-                    value={kingdom.Description} />
+                    type="text"
+                    onChange={event => setKingdomDescription(event.target.value)}
+                    value={kingdomDescription} />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="kingdomState">
                     <Form.Label>Статус</Form.Label>
-                    <Form.Control type="text" 
-                    disabled = {!isModerator} value={kingdom.State} />
+                    <KingdomStatusSelector kingdomId={kingdom.Id} 
+                    defaultValue={kingdom.State}/>
                   </Form.Group>
                 </Form>
               </Col>
@@ -170,7 +334,7 @@ const ModeratorAddAndEditKingdom: React.FC<{ add: boolean }> = ({ add }) => {
                 <Button variant="danger">
                   Удалить
                 </Button>
-                <Button>
+                <Button onClick={() => checkAndUpdateKingdom()}>
                   Сохранить
                 </Button>
               </Row>
@@ -187,35 +351,49 @@ const ModeratorAddAndEditKingdom: React.FC<{ add: boolean }> = ({ add }) => {
         <Container>
           <Row style={{ justifyContent: 'center' }}>
             <Col xs={4}>
-              <Image alt={'загрузите изображение'}
-              style={{ width: '100%' }} rounded />
+              <Form.Control accept=".png,.jpg,.jpeg"
+              type="file" onChange={handlePhotoChange} />
+              {preview && <Image src={preview} fluid />}
             </Col>
             <Col xs={4}>
               <Form>
                 <Form.Group className="mb-3" controlId="kingdomName">
                   <Form.Label>Название</Form.Label>
-                  <Form.Control type="text" />
+                  <Form.Control 
+                  onChange={event => setKingdomName(event.target.value)}
+                  type="text" 
+                  value={kingdomName} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="kingdomArea">
                   <Form.Label>Площадь</Form.Label>
-                  <Form.Control type="text" />
+                  <Form.Control 
+                  type="number" 
+                  onChange={event => setKingdomArea(Number(event.target.value))}
+                  value={kingdomArea ? kingdomArea : 0} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="kingdomCapital">
                   <Form.Label>Столица</Form.Label>
-                  <Form.Control type="text" />
+                  <Form.Control 
+                  type="text"
+                  onChange={event => setKingdomCapital(event.target.value)}
+                  value={kingdomCapital} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="kingdomDescription">
                   <Form.Label>О княжестве</Form.Label>
-                  <Form.Control as="textarea" rows={3} type="text" />
+                  <Form.Control as="textarea" rows={3} 
+                  type="text"
+                  onChange={event => setKingdomDescription(event.target.value)}
+                  value={kingdomDescription} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="kingdomState">
                   <Form.Label>Статус</Form.Label>
-                  <KingdomCreateStatusSelector /> 
+                  <KingdomCreateStatusSelector 
+                  onSelectChange={handleKingdomStatusSelectorChange} /> 
                 </Form.Group>
               </Form>
             </Col>
             <Row className="moderator_add_and_edit_kingdom_page__buttons">
-              <Button>
+              <Button onClick={() => checkAndCreateKingdom()}>
                 Сохранить
               </Button>
             </Row>

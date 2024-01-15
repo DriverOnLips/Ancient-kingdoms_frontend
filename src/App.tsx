@@ -43,8 +43,8 @@ const App: React.FC = () => {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/application_moderator" element={<ModeratorApplicationFeed />} />
         <Route path="/kingdom_moderator" element={<ModeratorKingdomsFeed />} />
-        <Route path="/kingdom_add/" element={<ModeratorAddAndEditKingdom add={false} />} />      
-        <Route path="/kingdom_edit/:id" element={<ModeratorAddAndEditKingdom add={true} />} />      
+        <Route path="/kingdom_add/" element={<ModeratorAddAndEditKingdom add={true} />} />      
+        <Route path="/kingdom_edit/:id" element={<ModeratorAddAndEditKingdom add={false} />} />      
       </Routes>
     </BrowserRouter>
   )

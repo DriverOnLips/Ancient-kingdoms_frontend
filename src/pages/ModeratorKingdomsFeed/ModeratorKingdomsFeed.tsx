@@ -40,6 +40,10 @@ const ModeratorKingdomsFeed: React.FC = () => {
   }, []);
 
   useEffect(() => {
+
+  }, [kingdoms])
+
+  useEffect(() => {
     setKingdoms('')
       .then(result => {
         if (!result.result) {

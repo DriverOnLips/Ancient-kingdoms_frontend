@@ -23,7 +23,10 @@ function TableKingdomHeader({ kingdoms } : {kingdoms: Kingdom[]} ) {
       <tbody>
         {kingdoms?.map((kingdom: Kingdom) => (
           <tr key={kingdom.Id} 
-          onClick={() => navigate(`/kingdom_edit/${kingdom.Id}`)}
+          onClick={event => {
+            event.preventDefault();
+            navigate(`/kingdom_edit/${kingdom.Id}`);
+          }}
           className='table_kingdom_header__item'>
             <td>{kingdom.Id}</td>
             <td>{kingdom.Name}</td>

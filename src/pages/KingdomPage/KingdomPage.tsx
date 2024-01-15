@@ -3,8 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Form, Container, Row, Image, Col, ModalTitle } from 'react-bootstrap';
 
 import 'react-datepicker/dist/react-datepicker.css';
-import DatePicker, { registerLocale } from 'react-datepicker';
-import { parseISO } from "date-fns";
+import DatePicker from 'react-datepicker';
 import ru from 'date-fns/locale/ru'; 
 
 import { useKingdom } from '../../hooks/useKingdom';
@@ -264,25 +263,27 @@ const KingdomPage: React.FC = () => {
                 <Form.Group className="mb-3" controlId="kingdomArea">
                   <Form.Label>Площадь</Form.Label>
                   <Form.Control type="text" 
-                  disabled = {!isModerator} 
+                  disabled = {true} 
                   value={kingdom.Area} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="kingdomCapital">
                   <Form.Label>Столица</Form.Label>
                   <Form.Control type="text"
-                  disabled = {!isModerator}
+                  disabled = {true} 
                   value={kingdom.Capital} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="kingdomDescription">
                   <Form.Label>О княжестве</Form.Label>
                   <Form.Control as="textarea" rows={3} 
-                  type="text" disabled = {!isModerator} 
+                  type="text" 
+                  disabled = {true}
                   value={kingdom.Description} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="kingdomState">
                   <Form.Label>Статус</Form.Label>
                   <Form.Control type="text" 
-                  disabled = {!isModerator} value={kingdom.State} />
+                  disabled = {true} 
+                  value={kingdom.State} />
                 </Form.Group>
               </Form>
             </Col>
@@ -304,16 +305,6 @@ const KingdomPage: React.FC = () => {
             Добавить в запись
           </Button>
         </Col>
-        { isModerator ? (
-          <Row className="kingdom-page__buttons mb-5" style={{gap: '1rem'}}>
-            <Button variant="danger">
-              Удалить
-            </Button>
-            <Button>
-              Сохранить
-            </Button>
-          </Row>
-        ) : ( <></> ) }
       </div>
     </div>
   );
