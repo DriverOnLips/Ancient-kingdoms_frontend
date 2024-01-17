@@ -38,13 +38,9 @@ export class KingdomsApi {
         }
       })
         .then((res) => {
-          console.log('res', res);
-          
           return res.data;
         })
-        .catch((error) => {
-          console.log('error', error);
-
+        .catch(() => {
           const mockedResponse: ResponseDefault = {
             Code: 503,
             Status: 'Сервер недоступен',
