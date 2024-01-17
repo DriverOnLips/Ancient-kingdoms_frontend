@@ -40,7 +40,7 @@ export class KingdomsApi {
         .then((res) => {
           return res.data;
         })
-        .catch((error) => {
+        .catch(() => {
 
           const mockedResponse: ResponseDefault = {
             Code: 503,
@@ -48,7 +48,6 @@ export class KingdomsApi {
             Message: '',
             Body: mockedGetKingdoms(kingdomName),
           }
-          console.log(error, kingdomName, mockedResponse);
 
           return mockedResponse;
         });
