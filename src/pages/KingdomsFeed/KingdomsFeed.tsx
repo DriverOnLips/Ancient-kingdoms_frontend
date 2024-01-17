@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { InputGroup, Form, Row, Container, Col, Button } from 'react-bootstrap';
+import { InputGroup, Form, Row, Container } from 'react-bootstrap';
 
 import KingdomItem from '../../components/KingdomItem/KingdomItem';
 import { Kingdom } from "../../Interfaces/dataStructures/KingdomInterface";
@@ -17,7 +17,7 @@ const KingdomsFeed: React.FC = () => {
   const [modalError, setModalError] = useState('');
   const [modalVariant, setModalVariant] = useState('');
   const [modalCanselText, setModalCanselText] = useState('');
-  const [modalSaveText, setModalSaveText] = useState('');
+  const [modalSaveText, {}] = useState('');
 
   const [isLoaded, setIsLoaded] = useState(false); 
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Button, Container, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { Button, Row, Col } from "react-bootstrap";
 
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker, { registerLocale } from 'react-datepicker';

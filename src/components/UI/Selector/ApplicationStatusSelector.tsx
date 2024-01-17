@@ -1,5 +1,5 @@
 import { Form } from "react-bootstrap";
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, ChangeEvent } from "react";
 
 import { useApp } from "../../../hooks/useApp";
 import { useApplication } from "../../../hooks/useApplication";

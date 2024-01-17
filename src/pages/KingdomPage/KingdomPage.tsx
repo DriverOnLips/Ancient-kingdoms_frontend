@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { Button, Form, Container, Row, Image, Col, ModalTitle } from 'react-bootstrap';
+import { useNavigate, useParams } from "react-router-dom";
+import { Button, Form, Container, Row, Image, Col } from 'react-bootstrap';
 
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
@@ -29,7 +29,7 @@ const KingdomPage: React.FC = () => {
 
   const [isLoaded, setIsLoaded] = useState(false); 
 
-  const { isAuthorized, isModerator } = useAuth();
+  const { isAuthorized } = useAuth();
  
   const { kingdom, setKingdom, deleteKingdom } = useKingdom();
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {Container, Nav, Navbar, NavDropdown, InputGroup, Form }from 'react-bootstrap';
+import {Container, Nav, Navbar, NavDropdown }from 'react-bootstrap';
 
 import Breadcrumbs from '../UI/Breadcrumbs/Breadcrumbs';
 import { useAuth } from '../../hooks/useAuth';
@@ -18,7 +18,7 @@ function NavbarUser() {
   const [modalError, setModalError] = useState('');
   const [modalVariant, setModalVariant] = useState('');
   const [modalCanselText, setModalCanselText] = useState('');
-  const [modalSaveText, setModalSaveText] = useState('');
+  const [modalSaveText, {}] = useState('');
 
   const { currentPage } = useApp();
 

@@ -17,7 +17,7 @@ import ModeratorAddAndEditKingdom from './pages/ModeratorAddAndEditKingdom/Moder
 
 
 const App: React.FC = () => {
-  const { isModerator, checkLogin } = useAuth();
+  const { checkLogin } = useAuth();
 
   const [isLoaded, setIsLoaded] = useState(false);
 

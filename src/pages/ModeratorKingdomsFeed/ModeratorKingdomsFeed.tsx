@@ -6,8 +6,6 @@ import { useApp } from "../../hooks/useApp";
 import Loader from "../../components/UI/Loader/Loader";
 import MyModal from "../../components/UI/Modal/Modal";
 import { errorMatching } from "../../utils/namesMatching/errorMatching";
-import { Kingdom } from "../../Interfaces/dataStructures/KingdomInterface";
-import KingdomItem from "../../components/KingdomItem/KingdomItem";
 import TableKingdomHeader from "../../components/UI/Tables/KingdomHeader/TableKingdomHeader";
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +19,7 @@ const ModeratorKingdomsFeed: React.FC = () => {
   const [modalError, setModalError] = useState('');
   const [modalVariant, setModalVariant] = useState('');
   const [modalCanselText, setModalCanselText] = useState('');
-  const [modalSaveText, setModalSaveText] = useState('');
+  const [modalSaveText, {}] = useState('');
 
   const [isLoaded, setIsLoaded] = useState(false); 
 

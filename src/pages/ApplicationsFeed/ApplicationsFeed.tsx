@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Col } from "react-bootstrap";
 
 import { useApplication } from "../../hooks/useApplication";
 import MyModal from "../../components/UI/Modal/Modal";
@@ -18,7 +18,7 @@ const ApplicationFeed: React.FC = () => {
   const [modalError, setModalError] = useState('');
   const [modalVariant, setModalVariant] = useState('');
   const [modalCanselText, setModalCanselText] = useState('');
-  const [modalSaveText, setModalSaveText] = useState('');
+  const [modalSaveText, {}] = useState('');
 
   const [isLoaded, setIsLoaded] = useState(false);
 

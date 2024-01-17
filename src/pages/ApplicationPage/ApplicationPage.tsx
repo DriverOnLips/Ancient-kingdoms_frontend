@@ -32,14 +32,12 @@ const ApplicationPage: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const { setApplicationToCreate,
-    currentApplication, 
+  const { currentApplication, 
     applicationToCreate,
     setCurrentApplication,
     deleteCurrentApplication,
     updateApplicationStatus,
     updateApplicationRuler,
-    deleteApplication,
   } = useApplication();
 
   const saveApplication = () => {

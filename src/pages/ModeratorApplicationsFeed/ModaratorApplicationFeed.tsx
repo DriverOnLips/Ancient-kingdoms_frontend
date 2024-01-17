@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Row, Container, Col, InputGroup, Form, Button } from "react-bootstrap";
 
@@ -28,7 +28,7 @@ const ModeratorApplicationFeed: React.FC = () => {
   const [modalError, setModalError] = useState('');
   const [modalVariant, setModalVariant] = useState('');
   const [modalCanselText, setModalCanselText] = useState('');
-  const [modalSaveText, setModalSaveText] = useState('');
+  const [modalSaveText, {}] = useState('');
 
   const [isLoaded, setIsLoaded] = useState(false);
 

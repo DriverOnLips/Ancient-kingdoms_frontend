@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useCallback } from "react";
 
 import { ClearStore,
   SetApplications, 
@@ -468,27 +467,27 @@ export function useApplication() {
   }
 
 
-  const debounce = (func: any, delay: number) => {
-    let timeoutId: any;
-    return function (...args: any[]): Promise<{ result: boolean; response: ResponseDefault; }> {
-      return new Promise((resolve, reject) => {
-        const executeFunction = async () => {
-          try {
-            const result = await func(...args);
-            resolve(result);
-          } catch (error) {
-            reject(error);
-          }
-        };
+  // const debounce = (func: any, delay: number) => {
+  //   let timeoutId: any;
+  //   return function (...args: any[]): Promise<{ result: boolean; response: ResponseDefault; }> {
+  //     return new Promise((resolve, reject) => {
+  //       const executeFunction = async () => {
+  //         try {
+  //           const result = await func(...args);
+  //           resolve(result);
+  //         } catch (error) {
+  //           reject(error);
+  //         }
+  //       };
   
-        if (timeoutId) {
-          clearTimeout(timeoutId);
-        }
+  //       if (timeoutId) {
+  //         clearTimeout(timeoutId);
+  //       }
   
-        timeoutId = setTimeout(executeFunction, delay);
-      });
-    };
-  };  
+  //       timeoutId = setTimeout(executeFunction, delay);
+  //     });
+  //   };
+  // };  
 
 
   // moderator functions
@@ -527,17 +526,17 @@ export function useApplication() {
     }
   }
 
-  const debounceTime = 1000;
+  // const debounceTime = 1000;
 
-  const debouncedSetApplications = useCallback(debounce(setApplications, debounceTime), [setApplications]);
-  const debouncedSetCurrentApplication = useCallback(debounce(setCurrentApplication, debounceTime), [setCurrentApplication]);
-  const debouncedSetApplicationToCreate = useCallback(debounce(setApplicationToCreate, debounceTime), [setApplicationToCreate]);
-  const debouncedDeleteCurrentApplication = useCallback(debounce(deleteCurrentApplication, debounceTime), [deleteCurrentApplication]);
-  const debouncedDeleteApplicationToCreate = useCallback(debounce(deleteApplicationToCreate, debounceTime), [deleteApplicationToCreate]);
-  const debouncedAddKingdomToApplication = useCallback(debounce(addKingdomToApplication, debounceTime), [addKingdomToApplication]);
-  const debouncedDeleteKingdomFromApplication = useCallback(debounce(deleteKingdomFromApplication, debounceTime), [deleteKingdomFromApplication]);
-  const debouncedUpdateApplicationStatus = useCallback(debounce(updateApplicationStatus, debounceTime), [updateApplicationStatus]);
-  const debouncedCreateApplication = useCallback(debounce(createApplication, debounceTime), [createApplication]);
+  // const debouncedSetApplications = useCallback(debounce(setApplications, debounceTime), [setApplications]);
+  // const debouncedSetCurrentApplication = useCallback(debounce(setCurrentApplication, debounceTime), [setCurrentApplication]);
+  // const debouncedSetApplicationToCreate = useCallback(debounce(setApplicationToCreate, debounceTime), [setApplicationToCreate]);
+  // const debouncedDeleteCurrentApplication = useCallback(debounce(deleteCurrentApplication, debounceTime), [deleteCurrentApplication]);
+  // const debouncedDeleteApplicationToCreate = useCallback(debounce(deleteApplicationToCreate, debounceTime), [deleteApplicationToCreate]);
+  // const debouncedAddKingdomToApplication = useCallback(debounce(addKingdomToApplication, debounceTime), [addKingdomToApplication]);
+  // const debouncedDeleteKingdomFromApplication = useCallback(debounce(deleteKingdomFromApplication, debounceTime), [deleteKingdomFromApplication]);
+  // const debouncedUpdateApplicationStatus = useCallback(debounce(updateApplicationStatus, debounceTime), [updateApplicationStatus]);
+  // const debouncedCreateApplication = useCallback(debounce(createApplication, debounceTime), [createApplication]);
 
   // return {
   //   applications,

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Application } from "../../../Interfaces/dataStructures/ApplicationInterface";
 import { ApplicationStatusRequest, 
   AddKingdomToApplicationRequest,
   DeleteKingdomFromApplicationRequest, 

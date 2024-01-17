@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { Button, Form, Container, Row, Image, Col, ModalTitle, InputGroup } from 'react-bootstrap';
+import { useParams } from "react-router-dom";
+import { Button, Form, Container, Row, Image, Col } from 'react-bootstrap';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -20,7 +20,7 @@ const ModeratorAddAndEditKingdom: React.FC<{ add: boolean }> = ({ add }) => {
   const [modalVariant, setModalVariant] = useState('');
   const [modalCanselText, setModalCanselText] = useState('');
   const [modalSaveText, setModalSaveText] = useState('');
-  const [modalHandleSaveMode, setModalHandleSaveMode] = useState<Number | null>(null);
+  // const [modalHandleSaveMode, setModalHandleSaveMode] = useState<Number | null>(null);
 
   const [kingdomName, setKingdomName] = useState('');
   const [kingdomArea, setKingdomArea] = useState<number | null>(null);
@@ -40,8 +40,6 @@ const ModeratorAddAndEditKingdom: React.FC<{ add: boolean }> = ({ add }) => {
   const { setCurrentPage, deleteCurrentPage } = useApp();
 
   const { id } = useParams();
-
-  const navigate = useNavigate();
 
   const [preview, setPreview] = useState('');
 
@@ -274,7 +272,7 @@ const ModeratorAddAndEditKingdom: React.FC<{ add: boolean }> = ({ add }) => {
           setModalCanselText('');
           setModalSaveText('');
           setModalShow(false);
-          setModalHandleSaveMode(null);
+          // setModalHandleSaveMode(null);
         }}
         handleSave={() => {}}
       />

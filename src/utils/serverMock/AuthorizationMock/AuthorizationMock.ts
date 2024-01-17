@@ -1,7 +1,7 @@
-import { CheckLoginResponce } from "../../api/ResponseInterface";
+import { ResponseDefault } from "../../api/ResponseInterface";
 
 export function mockedCheckLoginResponce() {
-  const CheckLoginResponce: CheckLoginResponce = {
+  const CheckLoginResponce: ResponseDefault = {
     Code: 503,
     Status: 'service unavailable',
     Message: 'Нет ответа от сервера',
