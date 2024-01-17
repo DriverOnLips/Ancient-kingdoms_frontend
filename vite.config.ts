@@ -15,6 +15,6 @@ export default defineConfig({
        }
       }
   },
-  // base: "/Ancient-kingdoms_frontend",
+  // base: "/Ancient-kingdoms_frontend/",
   plugins: [react()],
 })
