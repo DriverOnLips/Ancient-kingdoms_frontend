@@ -1,6 +1,6 @@
 import { Kingdom } from "../../Interfaces/KingdomInterface";
 
-export function mockedGetKingdoms() {
+export function mockedGetKingdoms(kingdomName: string) {
   const kingdoms: Kingdom[] = [
     {
       Id: 1,
@@ -66,9 +66,17 @@ export function mockedGetKingdoms() {
       State: "Данные подтверждены",
     },
   ];
-  return kingdoms;
+
+  if (kingdomName == '') {
+    return kingdoms;
+  }
+
+  return kingdoms.filter((kingdom) => 
+    kingdom.Name.toLowerCase().includes(kingdomName?.toLowerCase())
+  );
+
 }
 
 export function mockedGetKingdom(id: number) {
-  return mockedGetKingdoms()[id-1];
+  return mockedGetKingdoms('')[id-1];
 }

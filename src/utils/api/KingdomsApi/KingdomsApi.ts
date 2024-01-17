@@ -45,7 +45,7 @@ export class KingdomsApi {
             Code: 503,
             Status: 'Сервер недоступен',
             Message: '',
-            Body: mockedGetKingdoms(),
+            Body: mockedGetKingdoms(kingdomName),
           }
 
           return mockedResponse;
@@ -80,7 +80,7 @@ export class KingdomsApi {
             Message: '',
             Body: mockedGetKingdom(id),
           }
-          console.log(mockedResponse)
+
           return mockedResponse;
         });
   }
