@@ -9,7 +9,7 @@
 
 .navbar-elements {
   margin: 0;
-  justify-content: space-between;
+  justify-content: start!important;
   max-width: 100%;
   gap: 9vw;
 }

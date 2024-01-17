@@ -6,32 +6,33 @@ import { nameMatching } from '../../../utils/namesMatching/nameMatching';
 
 
 function Breadcrumbs() {
- const location = useLocation();
- const [path, setPath] = useState(location.pathname);
+  const location = useLocation();
 
- const navigate = useNavigate();
+  const [path, setPath] = useState(location.pathname);
 
- const pathComponents = path.split('/');
+  const navigate = useNavigate();
 
- const goto = (index: number) => {
-  const nestedPath = pathComponents.slice(0, index+1).join('/');
-  navigate(nestedPath);
- }
+  const pathComponents = path.split('/').slice(1);
 
- useEffect(() => {
-  setPath(location.pathname);
- }, [location.pathname]);
+  const goto = (index: number) => {
+    const nestedPath = pathComponents.slice(0, index+1).join('/');
+    navigate(`/Ancient-kingdoms_frontend/${nestedPath}`);
+  }
+
+  useEffect(() => {
+    setPath(location.pathname.split('/').slice(1).join('/'));
+  }, [location.pathname]);
 
 
- return (
-  <Breadcrumb>
-  {pathComponents?.map((component, index) => (
-    <Breadcrumb.Item onClick={() => goto(index)} key={index}>
-      {nameMatching(component)}
-    </Breadcrumb.Item>
-  ))}
-  </Breadcrumb>
- );
+  return (
+    <Breadcrumb>
+    {pathComponents?.map((component, index) => (
+      <Breadcrumb.Item onClick={() => goto(index)} key={index}>
+        {nameMatching(component)}
+      </Breadcrumb.Item>
+    ))}
+    </Breadcrumb>
+  );
 }
 
 export default Breadcrumbs;

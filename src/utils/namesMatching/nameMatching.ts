@@ -18,4 +18,3 @@ export const nameMatching = (name: string): string =>
     : name === 'kingdom_edit'
     ? 'Изменение княжества'
     : name;
-    

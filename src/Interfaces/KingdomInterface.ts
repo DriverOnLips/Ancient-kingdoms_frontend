@@ -7,9 +7,3 @@ export interface Kingdom {
   Description: string;
   State: string;
 }
-
-export interface KingdomWithTerm {
-  Kingdom: Kingdom,
-  From: Date,
-  To: Date,
-}
