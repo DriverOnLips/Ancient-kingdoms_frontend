@@ -35,8 +35,8 @@ const App: React.FC = () => {
     <BrowserRouter basename="/">
       <NavbarUser />
       <Routes>
-        <Route path="/kingdom" element={<KingdomsFeed />} />
-        <Route path="/kingdom/:id" element={<KingdomPage />} />      
+        <Route path="/Ancient-kingdoms_frontend/kingdom" element={<KingdomsFeed />} />
+        <Route path="/Ancient-kingdoms_frontend/kingdom/:id" element={<KingdomPage />} />      
         <Route path="/application" element={<ApplicationFeed />} />
         <Route path="/application/:id" element={<ApplicationPage />} />              
         <Route path="/login" element={<LoginPage />} />
