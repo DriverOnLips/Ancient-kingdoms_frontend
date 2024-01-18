@@ -15,8 +15,8 @@ import { ClearStore,
   UpdateKingdomFromApplication,
   DeleteApplication,
   SetApplicationsAll } from "../stores/ApplicationStore";
-import { Application } from "../Interfaces/dataStructures/ApplicationInterface";
-import { KingdomWithTerm, Kingdom } from "../Interfaces/dataStructures/KingdomInterface";
+import { Application } from "../Interfaces/ApplicationInterface";
+import { KingdomWithTerm, Kingdom } from "../Interfaces/KingdomInterface";
 import { ApplicationApi } from "../utils/api/ApplicationApi/ApplicationApi";
 import { ResponseDefault } from "../utils/api/ResponseInterface";
 

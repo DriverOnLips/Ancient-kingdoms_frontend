@@ -7,7 +7,7 @@ import DatePicker, { registerLocale } from 'react-datepicker';
 import { parseISO } from "date-fns";
 import ru from 'date-fns/locale/ru'; 
 
-import { Kingdom } from "../../Interfaces/dataStructures/KingdomInterface";
+import { Kingdom } from "../../Interfaces/KingdomInterface";
 import { useApplication } from "../../hooks/useApplication";
 import MyModal from "../UI/Modal/Modal";
 import { useAuth } from "../../hooks/useAuth";
@@ -300,12 +300,10 @@ const KingdomItem: React.FC<{ kingdom: Kingdom; inApplication: boolean, disabled
   };
 
   useEffect(() => {
-    // if (inApplication && !disabled) {
       if (applicationDateFrom && applicationDateTo) {
         setDateFrom(parseISO(applicationDateFrom!.toString()))
         setDateTo(parseISO(applicationDateTo!.toString()))
       }
-    // }
   }, [inApplication, disabled, applicationDateFrom, applicationDateTo]);
   
   if (modalShow) {

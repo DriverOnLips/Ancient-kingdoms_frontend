@@ -6,7 +6,7 @@ import { SetKingdoms,
   DeleteKingdom,
   UpdateKingdomStatus } from '../stores/KingdomStore';
 import { ResponseDefault } from "../utils/api/ResponseInterface";
-import { Kingdom } from "../Interfaces/dataStructures/KingdomInterface";
+import { Kingdom } from "../Interfaces/KingdomInterface";
 
 
 export function useKingdom () {

@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import { SetUser, DeleteUser } from "../stores/UserStore";
-import { User } from "../Interfaces/dataStructures/UserInterface";
+import { User } from "../Interfaces/UserInterface";
 import { AuthorizationApi } from "../utils/api/AuthorizationApi/AuthorizationApi";
 import { useApplication } from "./useApplication";
 
 
 export function useAuth() {
   const authorizationApi = new AuthorizationApi();
-  const { user, isAuthorized, isModerator } = useSelector((store: any) => store.user);
+  const { user, isAuthorized } = useSelector((store: any) => store.user);
 
   const { clearStore } = useApplication();
 
@@ -74,7 +74,6 @@ export function useAuth() {
   return {
     user,
     isAuthorized,
-    isModerator,
     setUser,
     checkLogin,
     login,

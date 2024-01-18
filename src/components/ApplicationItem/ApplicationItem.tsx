@@ -1,13 +1,13 @@
 import { Col, Row, Form } from "react-bootstrap";
 
-import { Application } from "../../Interfaces/dataStructures/ApplicationInterface";
+import { Application } from "../../Interfaces/ApplicationInterface";
 import { useNavigate } from "react-router-dom";
 import { ApplicationStatusSelector } from "../UI/Selector/ApplicationStatusSelector";
 import { useEffect } from "react";
 
 
-const ApplicationItem: React.FC<{ forModerator: boolean, application: Application }> = 
-({ forModerator, application }) => {
+const ApplicationItem: React.FC<{ application: Application }> = 
+({ application }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,17 +29,6 @@ const ApplicationItem: React.FC<{ forModerator: boolean, application: Applicatio
           plaintext readOnly defaultValue={ application.Ruler != '' ? 
           application.Ruler : 'Правитель не выбран' } />
         </Col>
-        { forModerator ? (
-          <>
-            <Form.Label column>
-              Пользователь
-            </Form.Label>
-            <Col className="applications-feed__textcontent">
-              <Form.Control className="text-base1-medium"
-              plaintext readOnly defaultValue={application.Creator.Name} />
-            </Col>
-          </>
-        ) : <></>}
       </Form.Group>
       <Form.Group as={Col} xs={4} sm={4} md={4} lg={4} 
       className="applications-feed__state_and_check">
@@ -52,14 +41,8 @@ const ApplicationItem: React.FC<{ forModerator: boolean, application: Applicatio
           event.stopPropagation();
         }
         }>
-          { forModerator ? (
-            <ApplicationStatusSelector 
-            applicationId={application.Id!} 
-            defaultValue={application.State}/>
-          ) : (
-            <Form.Control className="text-base1-medium"
-            plaintext readOnly defaultValue={application.State} />
-          ) }
+          <Form.Control className="text-base1-medium"
+          plaintext readOnly defaultValue={application.State} />
         </Col>
         <Form.Label column>
           Проверка

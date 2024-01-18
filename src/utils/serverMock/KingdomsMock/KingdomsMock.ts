@@ -1,4 +1,4 @@
-import { Kingdom } from "../../../Interfaces/dataStructures/KingdomInterface";
+import { Kingdom } from "../../../Interfaces/KingdomInterface";
 
 export function mockedGetKingdoms() {
     const kingdoms: Kingdom[] = [

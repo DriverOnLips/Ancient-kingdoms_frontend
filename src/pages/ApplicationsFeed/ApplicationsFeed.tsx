@@ -5,7 +5,7 @@ import { useApplication } from "../../hooks/useApplication";
 import MyModal from "../../components/UI/Modal/Modal";
 import Loader from "../../components/UI/Loader/Loader";
 import { useNavigate } from "react-router-dom";
-import { Application } from "../../Interfaces/dataStructures/ApplicationInterface";
+import { Application } from "../../Interfaces/ApplicationInterface";
 import ApplicationItem from "../../components/ApplicationItem/ApplicationItem";
 import { useApp } from "../../hooks/useApp";
 import { errorMatching } from "../../utils/namesMatching/errorMatching";
@@ -107,7 +107,6 @@ const ApplicationFeed: React.FC = () => {
               <ApplicationItem
               key={application.Id}
               application={application}
-              forModerator={false}
               />
             ))}
           </Col>

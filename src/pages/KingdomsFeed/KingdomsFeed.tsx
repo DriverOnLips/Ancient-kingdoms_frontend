@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { InputGroup, Form, Row, Container, Col, Button } from 'react-bootstrap';
 
 import KingdomItem from '../../components/KingdomItem/KingdomItem';
-import { Kingdom } from "../../Interfaces/dataStructures/KingdomInterface";
+import { Kingdom } from "../../Interfaces/KingdomInterface";
 import Loader from '../../components/UI/Loader/Loader';
 import { useKingdom } from '../../hooks/useKingdom';
 import MyModal from '../../components/UI/Modal/Modal';

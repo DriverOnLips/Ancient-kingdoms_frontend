@@ -29,7 +29,7 @@ const KingdomPage: React.FC = () => {
 
   const [isLoaded, setIsLoaded] = useState(false); 
 
-  const { isAuthorized, isModerator } = useAuth();
+  const { isAuthorized } = useAuth();
  
   const { kingdom, setKingdom, deleteKingdom } = useKingdom();
 

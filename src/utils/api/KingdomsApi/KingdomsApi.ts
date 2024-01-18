@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import { ResponseDefault } from '../ResponseInterface';
-import { Kingdom } from '../../../Interfaces/dataStructures/KingdomInterface';
+import { Kingdom } from '../../../Interfaces/KingdomInterface';
 
 
 export class KingdomsApi {

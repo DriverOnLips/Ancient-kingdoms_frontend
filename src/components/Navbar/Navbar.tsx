@@ -22,7 +22,7 @@ function NavbarUser() {
 
   const { currentPage } = useApp();
 
-  const { user, isAuthorized, isModerator, logout } = useAuth()
+  const { user, isAuthorized, logout } = useAuth()
   const { 
     applications,
     applicationsCount, 
@@ -140,21 +140,6 @@ function NavbarUser() {
                 applicationsCount : 
                 <></> }
               </Nav.Link>
-              { isModerator ? (
-                <>
-                  <Nav.Link onClick={() => navigate('/application_moderator')}
-                  className='navbar__item text-base2-medium'>
-                    Записи пользователей { applicationsAllCount > 0 ? 
-                    applicationsAllCount : <></> }
-                  </Nav.Link>
-                  <Nav.Link onClick={() => navigate('/kingdom_moderator')}
-                  className='navbar__item text-base2-medium'>
-                    Все княжества
-                  </Nav.Link>
-                </>
-              ) :(
-                <></>
-              )}
               <NavDropdown className='navbar__item text-base2-medium' title={user.Name} id="basic-nav-dropdown">
                 <NavDropdown.Item style={{all: 'unset'}} onClick={ () => {
                   logout()

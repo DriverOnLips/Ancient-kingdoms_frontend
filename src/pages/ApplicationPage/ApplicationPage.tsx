@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom";
 import { Col, Row, Form, Button } from "react-bootstrap";
 
-import { KingdomWithTerm } from "../../Interfaces/dataStructures/KingdomInterface";
+import { KingdomWithTerm } from "../../Interfaces/KingdomInterface";
 import { useApplication } from "../../hooks/useApplication";
 import MyModal from "../../components/UI/Modal/Modal";
 import Loader from "../../components/UI/Loader/Loader";

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Kingdom } from '../Interfaces/dataStructures/KingdomInterface';
+import { Kingdom } from '../Interfaces/KingdomInterface';
 
 interface KingdomState {
   kingdoms: Kingdom[],

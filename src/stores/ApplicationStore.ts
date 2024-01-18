@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { Application } from "../Interfaces/dataStructures/ApplicationInterface";
-import { KingdomWithTerm } from "../Interfaces/dataStructures/KingdomInterface";
+import { Application } from "../Interfaces/ApplicationInterface";
+import { KingdomWithTerm } from "../Interfaces/KingdomInterface";
 
 
 interface ApplicationState {
