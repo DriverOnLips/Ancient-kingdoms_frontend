@@ -25,7 +25,7 @@ export class ApplicationApi {
       { name: 'updateApplicationStatusModerator', url: '/api/application/status/moderator' },
       { name: 'addKingdomToApplication', url: '/api/application/add_kingdom' },
       { name: 'deleteKingdomFromApplication', url: '/api/application/delete_kingdom' },
-      { name: 'createApplication', url: '/api/application/create' },
+      // { name: 'createApplication', url: '/api/application/create' },
       { name: 'deleteApplication', url: '/api/application/delete' },
       { name: 'updateApplicationRuler', url: '/api/application/update' },
       { name: 'updateKingdomFromApplication', url: '/api/application/update_kingdom' },
@@ -146,7 +146,7 @@ export class ApplicationApi {
         });
   }
 
-  addKingdomToApplication = async (applicationId: Number, dateFrom: Date,
+  addKingdomToApplication = async (dateFrom: Date,
     dateTo: Date, kingdomId: Number): Promise<ResponseDefault> => {
     const configItem = this.config.find((item) => item.name === 'addKingdomToApplication');
     if (!configItem) {

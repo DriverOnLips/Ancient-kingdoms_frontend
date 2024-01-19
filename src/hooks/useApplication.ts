@@ -213,8 +213,9 @@ export function useApplication() {
     }
       
     try {
-      const response = await applicationsApi.addKingdomToApplication(applicationToCreate.Id,
-        dateFrom, dateTo, kingdom.Id);
+      const response = await applicationsApi.addKingdomToApplication(dateFrom, dateTo, kingdom.Id);
+        // applicationToCreate.Id
+        
       if (response.Status === 'ok') {   // case successful
         const kingdomWithTerm: KingdomWithTerm = {
           Kingdom: kingdom,
