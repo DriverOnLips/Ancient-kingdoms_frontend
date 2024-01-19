@@ -302,7 +302,7 @@ export class ApplicationApi {
         });
   }
 
-  updateKingdomFromApplication = async (applicationId: Number, dateFrom: Date,
+  updateKingdomFromApplication = async (dateFrom: Date,
     dateTo: Date, kingdomId: Number): Promise<ResponseDefault> => {
     const configItem = this.config.find((item) => item.name === 'updateKingdomFromApplication');
     if (!configItem) {

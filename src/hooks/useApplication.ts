@@ -217,13 +217,22 @@ export function useApplication() {
         // applicationToCreate.Id
         
       if (response.Status === 'ok') {   // case successful
-        const kingdomWithTerm: KingdomWithTerm = {
-          Kingdom: kingdom,
-          From: dateFrom,
-          To: dateTo,
+        const application: Application = {
+          Id: response.Body.Application.Id,
+          State: response.Body.Application.State, 
+          DateCreate: response.Body.Application.DateCreate,
+          DateSend: response.Body.Application.DateSend,
+          DateComplete: response.Body.Application.DateComplete,
+          Ruler: response.Body.Application.Ruler,
+          Creator: response.Body.Application.Creator,
+          CreatorId: response.Body.Application.CreatorRefer,
+          Moderator: response.Body.Application.Moderator,
+          ModeratorId: response.Body.Application.ModeratorRefer,
+          Check: response.Body.Application.Check,
+          KingdomsWithTerm: response.Body.Kingdoms,
         }
 
-        dispatch(AddKingdomToApplication(kingdomWithTerm));
+        dispatch(SetApplicationToCreate(application));
 
         return { result: true, response }
       } else if (response.Status === 'error') {  // case error
@@ -469,16 +478,26 @@ export function useApplication() {
 
   const updateKingdomFromApplication = async (dateFrom: Date, dateTo: Date, kingdom: Kingdom) => {     
     try {
-      const response = await applicationsApi.updateKingdomFromApplication(applicationToCreate.Id,
+      const response = await applicationsApi.updateKingdomFromApplication(
+        // applicationToCreate.Id,
         dateFrom, dateTo, kingdom.Id);
       if (response.Status === 'ok') {   // case successful
-        const kingdomWithTerm: KingdomWithTerm = {
-          Kingdom: kingdom,
-          From: dateFrom,
-          To: dateTo,
+        const application: Application = {
+          Id: response.Body.Application.Id,
+          State: response.Body.Application.State, 
+          DateCreate: response.Body.Application.DateCreate,
+          DateSend: response.Body.Application.DateSend,
+          DateComplete: response.Body.Application.DateComplete,
+          Ruler: response.Body.Application.Ruler,
+          Creator: response.Body.Application.Creator,
+          CreatorId: response.Body.Application.CreatorRefer,
+          Moderator: response.Body.Application.Moderator,
+          ModeratorId: response.Body.Application.ModeratorRefer,
+          Check: response.Body.Application.Check,
+          KingdomsWithTerm: response.Body.Kingdoms,
         }
 
-        dispatch(UpdateKingdomFromApplication(kingdomWithTerm));
+        dispatch(SetApplicationToCreate(application));
 
         return { result: true, response }
       } else if (response.Status === 'error') {  // case error
