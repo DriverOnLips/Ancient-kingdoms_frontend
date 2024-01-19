@@ -6,23 +6,17 @@ import { KingdomWithTerm } from "../Interfaces/dataStructures/KingdomInterface";
 
 interface ApplicationState {
   applicationsAll: Application[],
-  applicationsAllCount: number,
   applications: Application[],  // все заявки пользователя
   currentApplication: Application | null,  // выбранная заявка (с княжествами)
   applicationToCreate: Application | null,  // заявка-черновик
-  applicationsCount: number,
-  applicationToCreateKingdomsCount: number
   draftApplicationId: number,
 }
 
 const initialState: ApplicationState = {
   applicationsAll: [],
-  applicationsAllCount: 0,
   applications: [],
   currentApplication: null,
   applicationToCreate: null,
-  applicationsCount: 0,
-  applicationToCreateKingdomsCount: 0,
   draftApplicationId: 0,
 }
 
@@ -32,34 +26,24 @@ export const ApplicationSlice = createSlice({
   reducers: {
     ClearStore: (state) => {
       state.applicationsAll = [],
-      state.applicationsAllCount = 0,
       state.applications = [],
       state.currentApplication = null,
       state.applicationToCreate = null,
-      state.applicationsCount = 0,
-      state.applicationToCreateKingdomsCount = 0,
       state.draftApplicationId = 0
     },
     SetApplications: (state, action: PayloadAction<Application[]>) => {
       state.applications = action.payload;
-      state.applicationsCount = action.payload.length;
     },
     SetApplicationToCreate: (state, action: PayloadAction<Application>) => {
       state.applicationToCreate = action.payload;
-      state.applicationToCreateKingdomsCount = action.payload.KingdomsWithTerm?.length ? 
-        action.payload.KingdomsWithTerm.length : 0;
     },
     CreateApplicationToCreate: (state, action: PayloadAction<Application>) => {
       state.applicationToCreate = action.payload;
-      state.applicationToCreateKingdomsCount = action.payload.KingdomsWithTerm?.length ? 
-        action.payload.KingdomsWithTerm.length : 0;
 
       state.applications.push(state.applicationToCreate);
-      state.applicationsCount += 1;
     },
     DeleteApplicationToCreate: (state) => {
       state.applicationToCreate = null;
-      state.applicationToCreateKingdomsCount = 0;
     },
     SetCurrentApplication: (state, action: PayloadAction<Application | null>) => {
       state.currentApplication = action.payload;
@@ -70,20 +54,17 @@ export const ApplicationSlice = createSlice({
     AddKingdomToApplication: (state, action: PayloadAction<KingdomWithTerm>) => {
       if (state.applicationToCreate?.KingdomsWithTerm) {
         state.applicationToCreate?.KingdomsWithTerm.push(action.payload);
-        state.applicationToCreateKingdomsCount += 1;
 
         return;
       }
 
       state.applicationToCreate!.KingdomsWithTerm = [action.payload];
-      state.applicationToCreateKingdomsCount += 1;
     },
     DeleteKingdomFromApplication: (state, action: PayloadAction<Number>) => {
       if (!(state.applicationToCreate?.KingdomsWithTerm)) return;
 
       state.applicationToCreate.KingdomsWithTerm = state.applicationToCreate.KingdomsWithTerm
         .filter((kingdom: KingdomWithTerm) => kingdom.Kingdom.Id !== action.payload);
-      state.applicationToCreateKingdomsCount -= 1;
     },
     UpdateApplicationStatus: (state) => {
       if (!(state.applicationToCreate)) return;
@@ -91,7 +72,6 @@ export const ApplicationSlice = createSlice({
       state.applicationToCreate.State = 'На рассмотрении';
       state.applications.push(state.applicationToCreate);
       state.applicationToCreate = null;
-      state.applicationToCreateKingdomsCount = 0;
     },
     UpdateApplicationRuler: (state, action: PayloadAction<string>) => {
       if (!(state.applicationToCreate && state.currentApplication)) return;
@@ -105,7 +85,6 @@ export const ApplicationSlice = createSlice({
           return application;
         }
       })
-      state.applicationsCount = state.applications.length;
     },
     UpdateKingdomFromApplication: (state, action: PayloadAction<KingdomWithTerm>) => {
       const nestedApplication = state.applicationToCreate?.KingdomsWithTerm.find(
@@ -132,7 +111,6 @@ export const ApplicationSlice = createSlice({
 
     SetApplicationsAll: (state, action: PayloadAction<Application[]>) => {
       state.applicationsAll = action.payload;
-      state.applicationsAllCount = action.payload.length;
     },
     
   }

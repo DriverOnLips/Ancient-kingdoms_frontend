@@ -29,10 +29,7 @@ export function useApplication() {
       applications, 
       currentApplication, 
       applicationToCreate,
-      applicationsCount,
-      applicationToCreateKingdomsCount,
       applicationsAll,
-      applicationsAllCount,
       draftApplicationId,
   } = useSelector((store: any) => store.application);
 
@@ -619,11 +616,8 @@ export function useApplication() {
     applications,
     currentApplication,
     applicationToCreate,
-    applicationsCount,
-    applicationToCreateKingdomsCount,
     draftApplicationId,
     applicationsAll,
-    applicationsAllCount,
     
     clearStore,
     setApplications,
