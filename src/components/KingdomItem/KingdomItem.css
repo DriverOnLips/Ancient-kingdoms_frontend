@@ -8,6 +8,15 @@
   background-color: var(--background-main);
 }
 
+.feed-kingdom {
+  transition: background-color 0.5s ease;
+}
+
+.feed-kingdom:hover {
+  background-color: var(--secondary-2);
+}
+ 
+
 .feed-kingdom__kingdom_title {
   height: 120px;
 }
