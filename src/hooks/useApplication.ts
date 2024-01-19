@@ -14,6 +14,7 @@ import { ClearStore,
   UpdateApplicationRuler,
   UpdateKingdomFromApplication,
   DeleteApplication,
+  SetDraftApplicationId,
   SetApplicationsAll } from "../stores/ApplicationStore";
 import { Application } from "../Interfaces/dataStructures/ApplicationInterface";
 import { KingdomWithTerm, Kingdom } from "../Interfaces/dataStructures/KingdomInterface";
@@ -32,12 +33,17 @@ export function useApplication() {
       applicationToCreateKingdomsCount,
       applicationsAll,
       applicationsAllCount,
+      draftApplicationId,
   } = useSelector((store: any) => store.application);
 
   const dispatch = useDispatch();
 
   const clearStore = () => {
     dispatch(ClearStore());
+  }
+
+  const setDraftApplicationId = (id: number) => {
+    dispatch(SetDraftApplicationId(id));
   }
 
   const setApplications = async (id: Number | null) => {    
@@ -595,7 +601,7 @@ export function useApplication() {
     applicationToCreate,
     applicationsCount,
     applicationToCreateKingdomsCount,
-
+    draftApplicationId,
     applicationsAll,
     applicationsAllCount,
     
@@ -613,7 +619,7 @@ export function useApplication() {
     updateKingdomFromApplication,
     createApplication,
     deleteApplication,
-
+    setDraftApplicationId,
     setApplicationsAll,
 
   };

@@ -9,7 +9,7 @@ export interface ApplicationRulerRequest {
 }
 
 export interface AddKingdomToApplicationRequest {
-  ApplicationId: Number,
+  // ApplicationId: Number,
   KingdomId: Number,
   From: Date,
   To: Date,

@@ -158,7 +158,7 @@ export class ApplicationApi {
     }
 
     const body: AddKingdomToApplicationRequest = {
-      ApplicationId: applicationId,
+      // ApplicationId: applicationId,
       KingdomId: kingdomId,
       From: dateFrom,
       To: dateTo,
@@ -314,7 +314,7 @@ export class ApplicationApi {
     }
 
     const body: AddKingdomToApplicationRequest = {
-      ApplicationId: applicationId,
+      // ApplicationId: applicationId,
       KingdomId: kingdomId,
       From: dateFrom,
       To: dateTo,

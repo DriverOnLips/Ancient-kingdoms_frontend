@@ -7,11 +7,14 @@ import { SetKingdoms,
   UpdateKingdomStatus } from '../stores/KingdomStore';
 import { ResponseDefault } from "../utils/api/ResponseInterface";
 import { Kingdom } from "../Interfaces/dataStructures/KingdomInterface";
+import { useApplication } from "./useApplication";
 
 
 export function useKingdom () {
   const kingdomsApi = new KingdomsApi();
   const { kingdom, kingdoms } = useSelector((store: any) => store.kingdom);
+
+  const { draftApplicationId, setDraftApplicationId } = useApplication();
 
   const dispatch = useDispatch();
 
@@ -19,7 +22,8 @@ export function useKingdom () {
     try {
       const response = await kingdomsApi.getKingdomsByName(searchText);
       if (response.Status === 'ok') {  // case successful
-        dispatch(SetKingdoms(response.Body));
+        dispatch(SetKingdoms(response.Body.Kingdoms));
+        setDraftApplicationId(response.Body.Draft_Application);
 
         return { result: true, response };
       } else if (response.Status === 'error') {  // case error

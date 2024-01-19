@@ -12,6 +12,7 @@ interface ApplicationState {
   applicationToCreate: Application | null,  // заявка-черновик
   applicationsCount: number,
   applicationToCreateKingdomsCount: number
+  draftApplicationId: number,
 }
 
 const initialState: ApplicationState = {
@@ -21,7 +22,8 @@ const initialState: ApplicationState = {
   currentApplication: null,
   applicationToCreate: null,
   applicationsCount: 0,
-  applicationToCreateKingdomsCount: 0
+  applicationToCreateKingdomsCount: 0,
+  draftApplicationId: 0,
 }
 
 export const ApplicationSlice = createSlice({
@@ -35,7 +37,8 @@ export const ApplicationSlice = createSlice({
       state.currentApplication = null,
       state.applicationToCreate = null,
       state.applicationsCount = 0,
-      state.applicationToCreateKingdomsCount = 0
+      state.applicationToCreateKingdomsCount = 0,
+      state.draftApplicationId = 0
     },
     SetApplications: (state, action: PayloadAction<Application[]>) => {
       state.applications = action.payload;
@@ -120,6 +123,10 @@ export const ApplicationSlice = createSlice({
         }
       );
     },
+    SetDraftApplicationId: (state, action: PayloadAction<number>) => {
+      state.draftApplicationId = action.payload;
+      console.log(state.draftApplicationId)
+    },
 
     // moderator reducers
 
@@ -146,6 +153,6 @@ export const {
   UpdateApplicationRuler,
   UpdateKingdomFromApplication,
   DeleteApplication,
-  
+  SetDraftApplicationId,
   SetApplicationsAll,
 } = ApplicationSlice.actions;
