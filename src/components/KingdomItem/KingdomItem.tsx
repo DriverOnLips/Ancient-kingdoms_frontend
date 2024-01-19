@@ -364,7 +364,7 @@ const KingdomItem: React.FC<{ kingdom: Kingdom; inApplication: boolean, disabled
           { !inApplication ? (  // case open from feed
             <div>
               <Row className="mb-2">
-                <Button 
+                <Button variant="warning"
                   onClick={e => {
                     e.stopPropagation();
                     checkAndAddKingdomToApplication();
@@ -404,7 +404,7 @@ const KingdomItem: React.FC<{ kingdom: Kingdom; inApplication: boolean, disabled
               ) : (  // case application can be modified
                 <div>
                   <Row>
-                    <Button 
+                    <Button variant="warning"
                       onClick={e => {
                         e.stopPropagation();
                         modalUpdateKingdomFromApplication();

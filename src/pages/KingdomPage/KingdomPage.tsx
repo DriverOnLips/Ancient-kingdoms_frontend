@@ -301,7 +301,7 @@ const KingdomPage: React.FC = () => {
             dateFormat="dd/MM/yyyy"
             locale={ru}
           />
-          <Button onClick={() => checkAndAddKingdomToApplication()}>
+          <Button variant="warning" onClick={() => checkAndAddKingdomToApplication()}>
             Добавить в запись
           </Button>
         </Col>

@@ -33,3 +33,16 @@
 .react-datepicker__input-container {
   /* height: 100%; */
 }
+
+.btn-primary {
+  /* background-color: var(--secondary-2);
+  background-color: var(--secondary-2);
+  --bs-btn-bg: var(--secondary-2);
+  --bs-btn-border-color: var(--secondary-2);
+  --bs-btn-hover-bg: var(--secondary-2);
+  --bs-btn-hover-border-color: var(--secondary-2);
+  --bs-btn-active-bg: var(--secondary-2);
+  --bs-btn-active-border-color: var(--secondary-2);
+  --bs-btn-disabled-bg: var(--secondary-2);
+  --bs-btn-disabled-border-color: var(--secondary-2); */
+}
