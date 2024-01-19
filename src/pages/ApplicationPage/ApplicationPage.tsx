@@ -419,7 +419,7 @@ const ApplicationPage: React.FC = () => {
           <Col className="applications-page__textcontent">
             <Form.Control className="text-base1-medium"
             plaintext readOnly 
-            defaultValue={currentApplication.DateCreate.toString().split('T')[0]} />
+            defaultValue={`${currentApplication.DateCreate.toString().split('T')[0]} ${currentApplication.DateCreate.toString().split('T')[1].split('.')[0]}`} />
           </Col>
           <Form.Label column className="applications-page__dates_send">
             Дата оформления
@@ -428,7 +428,7 @@ const ApplicationPage: React.FC = () => {
             <Form.Control className="text-base1-medium"
             plaintext readOnly 
             defaultValue={ currentApplication.DateSend.toString().split('T')[0] === '0001-01-01' ?
-            'Запись еще не отправлена' : currentApplication.DateSend.toString().split('T')[0] } />
+            'Запись еще не отправлена' : `${currentApplication.DateSend.toString().split('T')[0]} ${currentApplication.DateSend.toString().split('T')[1].split('.')[0]}` } />
           </Col>
           <Form.Label column className="applications-page__dates_complete">
             Дата принятия решения
@@ -437,7 +437,7 @@ const ApplicationPage: React.FC = () => {
             <Form.Control className="text-base1-medium"
             plaintext readOnly 
             defaultValue={ currentApplication.DateComplete.toString().split('T')[0] === '0001-01-01' ?
-            'Запись еще не проверена' : currentApplication.DateComplete.toString().split('T')[0] } />
+            'Запись еще не проверена' : `${currentApplication.DateComplete.toString().split('T')[0]} ${currentApplication.DateComplete.toString().split('T')[1].split('.')[0]}` } />
           </Col>
         </Form.Group>
         <Form.Group as={Col} xs={2} sm={2} md={2} lg={2} 

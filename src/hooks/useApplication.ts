@@ -313,6 +313,39 @@ export function useApplication() {
     }
   }
 
+  const updateApplicationStatusModerator = async (applicationId: Number, state: string) => {
+    try {
+      const response = await applicationsApi.updateApplicationStatusModerator(applicationId, state);
+      if (response.Status === 'ok') {   // case successful
+        dispatch(UpdateApplicationStatus());
+
+        return { result: true, response }
+      } else if (response.Status === 'error') {  // case error
+
+        return { result: false, response }
+      } else {  // case no connect to server
+        const response: ResponseDefault = {
+          Code: 503,
+          Status: 'error',
+          Message: 'Нет связи с сервером',
+          Body: null,
+        }
+        
+        return { result: false, response};
+      } 
+    } catch (error: any) {
+      console.log(error)
+      const response: ResponseDefault = {
+        Code: 418,
+        Status: 'undefined error',
+        Message: error,
+        Body: null,
+      }
+
+      return { result: false, response };
+    }
+  }
+
   const createApplication = async (dateFrom: Date, dateTo: Date, kingdom: Kingdom) => {
     try {
       const response = await applicationsApi.createApplication(dateFrom, dateTo, kingdom.Id);
@@ -575,6 +608,7 @@ export function useApplication() {
     addKingdomToApplication,
     deleteKingdomFromApplication,
     updateApplicationStatus,
+    updateApplicationStatusModerator,
     updateApplicationRuler,
     updateKingdomFromApplication,
     createApplication,

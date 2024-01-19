@@ -29,6 +29,14 @@ const ApplicationItem: React.FC<{ forModerator: boolean, application: Applicatio
           plaintext readOnly defaultValue={ application.Ruler != '' ? 
           application.Ruler : 'Правитель не выбран' } />
         </Col>
+        <Form.Label column>
+          Проверил
+        </Form.Label>
+        <Col className="applications-feed__textcontent">
+          <Form.Control className="text-base1-medium"
+          plaintext readOnly defaultValue={ application.Moderator.Name ? 
+            application.Moderator.Name : 'Запись не проверена'} />
+        </Col>
         { forModerator ? (
           <>
             <Form.Label column>
@@ -78,7 +86,7 @@ const ApplicationItem: React.FC<{ forModerator: boolean, application: Applicatio
         <Col className="applications-feed__textcontent">
           <Form.Control className="text-base1-medium"
           plaintext readOnly 
-          defaultValue={application.DateCreate.toString().split('T')[0]} />
+          defaultValue={`${application.DateCreate.toString().split('T')[0]} ${application.DateCreate.toString().split('T')[1].split('.')[0]}`} />
         </Col>
         <Form.Label column className="applications-feed__dates_send">
           Дата оформления
@@ -87,7 +95,7 @@ const ApplicationItem: React.FC<{ forModerator: boolean, application: Applicatio
           <Form.Control className="text-base1-medium"
           plaintext readOnly 
           defaultValue={ application.DateSend.toString().split('T')[0] === '0001-01-01' ?
-          'Запись еще не отправлена' : application.DateSend.toString().split('T')[0] } />
+          'Запись еще не отправлена' : `${application.DateSend.toString().split('T')[0]} ${application.DateSend.toString().split('T')[1].split('.')[0]}` } />
         </Col>
         <Form.Label column className="applications-feed__dates_complete">
           Дата принятия решения
@@ -96,7 +104,7 @@ const ApplicationItem: React.FC<{ forModerator: boolean, application: Applicatio
           <Form.Control className="text-base1-medium"
           plaintext readOnly 
           defaultValue={ application.DateComplete.toString().split('T')[0] === '0001-01-01' ?
-          'Запись еще не проверена' : application.DateComplete.toString().split('T')[0] } />
+          'Запись еще не проверена' : `${application.DateComplete.toString().split('T')[0]} ${application.DateComplete.toString().split('T')[1].split('.')[0]}` } />
         </Col>
       </Form.Group>
     </Form>
