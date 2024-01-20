@@ -104,7 +104,6 @@ export const ApplicationSlice = createSlice({
     },
     SetDraftApplicationId: (state, action: PayloadAction<number>) => {
       state.draftApplicationId = action.payload;
-      console.log(state.draftApplicationId)
     },
 
     // moderator reducers
