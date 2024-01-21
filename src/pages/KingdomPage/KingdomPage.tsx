@@ -97,37 +97,37 @@ const KingdomPage: React.FC = () => {
       return;
     }
 
-    if (!applicationToCreate) {
-      createApplication(dateFrom, dateTo, kingdom)
-        .then(result => {
-          if (!result.result) {
-            setModalTitle('Ошибка');
-            setModalText('Детали ошибки')
-            setModalError(result.response?.Message!);
-            setModalCanselText('Закрыть');
-            setModalVariant('');
-            setModalShow(true);
+    // if (!applicationToCreate) {
+    //   createApplication(dateFrom, dateTo, kingdom)
+    //     .then(result => {
+    //       if (!result.result) {
+    //         setModalTitle('Ошибка');
+    //         setModalText('Детали ошибки')
+    //         setModalError(result.response?.Message!);
+    //         setModalCanselText('Закрыть');
+    //         setModalVariant('');
+    //         setModalShow(true);
 
-            return;
-          }
+    //         return;
+    //       }
 
-          setModalTitle('Княжество добавлено');
-          setModalVariant('withProgress');
-          setModalShow(true);
+    //       setModalTitle('Княжество добавлено');
+    //       setModalVariant('withProgress');
+    //       setModalShow(true);
 
-          return;
-        })
+    //       return;
+    //     })
 
-        .catch(error => {
-          console.log(error)
-          setModalTitle('Ошибка');
-          setModalText('Детали ошибки')
-          setModalCanselText('Закрыть');
-          setModalError(error);
-          setModalVariant('');
-          setModalShow(true);
-        });
-    } else {
+    //     .catch(error => {
+    //       console.log(error)
+    //       setModalTitle('Ошибка');
+    //       setModalText('Детали ошибки')
+    //       setModalCanselText('Закрыть');
+    //       setModalError(error);
+    //       setModalVariant('');
+    //       setModalShow(true);
+    //     });
+    // } else {
       addKingdomToApplication(dateFrom, dateTo, kingdom)
         .then(result => {
           if (!result.result) {
@@ -156,7 +156,7 @@ const KingdomPage: React.FC = () => {
           setModalShow(true);
         });
     }
-  }
+  // }
 
   const modalGotoLogin = () => {    // modal save mode 1
     navigate('/login');

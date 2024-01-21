@@ -20,7 +20,6 @@ export const ApplicationStatusSelector: React.FC<{applicationId: number, default
   const { updateApplicationStatusModerator } = useApplication();
 
   const handleStatusChange = (status: string) => {
-    // сделать под модератора на бэке
     updateApplicationStatusModerator(applicationId, status)
       .then(result => {
         if (!result.result) {
@@ -105,7 +104,7 @@ export function ApplicationFeedStatusFilterSelector() {
     <Form.Select defaultValue={moderatorApplicationFeedStatusFilter} 
     onChange={handleStatusChange}>
       <option value="">Все статусы</option>
-      <option value="В разработке">В разработке</option>
+      <option hidden={true} value="В разработке">В разработке</option>
       <option value="На рассмотрении">На рассмотрении</option>
       <option value="Одобрена">Одобрена</option>
       <option value="Отклонена">Отклонена</option>
