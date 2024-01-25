@@ -8,4 +8,4 @@
 
 Асинхронный сервер - https://github.com/Romanlock/Ancient-kingdoms_async-server
 
-Pages - https://romanlock.github.io/Ancient-kingdoms_frontend
+Деплой Pages - https://romanlock.github.io/Ancient-kingdoms_frontend
