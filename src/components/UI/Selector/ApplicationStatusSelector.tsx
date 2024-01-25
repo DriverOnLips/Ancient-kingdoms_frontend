@@ -17,11 +17,10 @@ export const ApplicationStatusSelector: React.FC<{applicationId: number, default
   const [modalCanselText, setModalCanselText] = useState('');
   const [modalSaveText, setModalSaveText] = useState('');
 
-  const { updateApplicationStatus } = useApplication();
+  const { updateApplicationStatusModerator } = useApplication();
 
   const handleStatusChange = (status: string) => {
-    // сделать под модератора на бэке
-    updateApplicationStatus(applicationId, status)
+    updateApplicationStatusModerator(applicationId, status)
       .then(result => {
         if (!result.result) {
           setModalTitle('Ошибка');
@@ -79,8 +78,8 @@ export const ApplicationStatusSelector: React.FC<{applicationId: number, default
     <Form.Select defaultValue={defaultValue} 
     onChange={(event) => handleStatusChange(event.target.value)}>
       <option value="" disabled hidden>Выберите новый статус заявки</option>
-      <option value="В разработке">В разработке</option>
-      <option value="На рассмотрении">На рассмотрении</option>
+      <option hidden={true} value="В разработке">В разработке</option>
+      <option hidden={true} value="На рассмотрении">На рассмотрении</option>
       <option value="Одобрена">Одобрена</option>
       <option value="Отклонена">Отклонена</option>
     </Form.Select>
@@ -105,7 +104,7 @@ export function ApplicationFeedStatusFilterSelector() {
     <Form.Select defaultValue={moderatorApplicationFeedStatusFilter} 
     onChange={handleStatusChange}>
       <option value="">Все статусы</option>
-      <option value="В разработке">В разработке</option>
+      <option hidden={true} value="В разработке">В разработке</option>
       <option value="На рассмотрении">На рассмотрении</option>
       <option value="Одобрена">Одобрена</option>
       <option value="Отклонена">Отклонена</option>

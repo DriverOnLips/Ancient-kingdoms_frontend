@@ -4,7 +4,7 @@
 
 .navbar {
   border-bottom: 2px solid var(--border-main);
-  background-color: var(--main-color)!important;
+  background-color: var(--secondary-3)!important;
 }
 
 .navbar-elements {

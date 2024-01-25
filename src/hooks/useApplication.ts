@@ -14,6 +14,7 @@ import { ClearStore,
   UpdateApplicationRuler,
   UpdateKingdomFromApplication,
   DeleteApplication,
+  SetDraftApplicationId,
   SetApplicationsAll } from "../stores/ApplicationStore";
 import { Application } from "../Interfaces/dataStructures/ApplicationInterface";
 import { KingdomWithTerm, Kingdom } from "../Interfaces/dataStructures/KingdomInterface";
@@ -28,16 +29,18 @@ export function useApplication() {
       applications, 
       currentApplication, 
       applicationToCreate,
-      applicationsCount,
-      applicationToCreateKingdomsCount,
       applicationsAll,
-      applicationsAllCount,
+      draftApplicationId,
   } = useSelector((store: any) => store.application);
 
   const dispatch = useDispatch();
 
   const clearStore = () => {
     dispatch(ClearStore());
+  }
+
+  const setDraftApplicationId = (id: number) => {
+    dispatch(SetDraftApplicationId(id));
   }
 
   const setApplications = async (id: Number | null) => {    
@@ -207,16 +210,26 @@ export function useApplication() {
     }
       
     try {
-      const response = await applicationsApi.addKingdomToApplication(applicationToCreate.Id,
-        dateFrom, dateTo, kingdom.Id);
+      const response = await applicationsApi.addKingdomToApplication(dateFrom, dateTo, kingdom.Id);
+        // applicationToCreate.Id
+        
       if (response.Status === 'ok') {   // case successful
-        const kingdomWithTerm: KingdomWithTerm = {
-          Kingdom: kingdom,
-          From: dateFrom,
-          To: dateTo,
+        const application: Application = {
+          Id: response.Body.Application.Id,
+          State: response.Body.Application.State, 
+          DateCreate: response.Body.Application.DateCreate,
+          DateSend: response.Body.Application.DateSend,
+          DateComplete: response.Body.Application.DateComplete,
+          Ruler: response.Body.Application.Ruler,
+          Creator: response.Body.Application.Creator,
+          CreatorId: response.Body.Application.CreatorRefer,
+          Moderator: response.Body.Application.Moderator,
+          ModeratorId: response.Body.Application.ModeratorRefer,
+          Check: response.Body.Application.Check,
+          KingdomsWithTerm: response.Body.Kingdoms,
         }
 
-        dispatch(AddKingdomToApplication(kingdomWithTerm));
+        dispatch(SetApplicationToCreate(application));
 
         return { result: true, response }
       } else if (response.Status === 'error') {  // case error
@@ -283,6 +296,39 @@ export function useApplication() {
   const updateApplicationStatus = async (applicationId: Number, state: string) => {
     try {
       const response = await applicationsApi.updateApplicationStatus(applicationId, state);
+      if (response.Status === 'ok') {   // case successful
+        dispatch(UpdateApplicationStatus());
+
+        return { result: true, response }
+      } else if (response.Status === 'error') {  // case error
+
+        return { result: false, response }
+      } else {  // case no connect to server
+        const response: ResponseDefault = {
+          Code: 503,
+          Status: 'error',
+          Message: 'Нет связи с сервером',
+          Body: null,
+        }
+        
+        return { result: false, response};
+      } 
+    } catch (error: any) {
+      console.log(error)
+      const response: ResponseDefault = {
+        Code: 418,
+        Status: 'undefined error',
+        Message: error,
+        Body: null,
+      }
+
+      return { result: false, response };
+    }
+  }
+
+  const updateApplicationStatusModerator = async (applicationId: Number, state: string) => {
+    try {
+      const response = await applicationsApi.updateApplicationStatusModerator(applicationId, state);
       if (response.Status === 'ok') {   // case successful
         dispatch(UpdateApplicationStatus());
 
@@ -429,16 +475,26 @@ export function useApplication() {
 
   const updateKingdomFromApplication = async (dateFrom: Date, dateTo: Date, kingdom: Kingdom) => {     
     try {
-      const response = await applicationsApi.updateKingdomFromApplication(applicationToCreate.Id,
+      const response = await applicationsApi.updateKingdomFromApplication(
+        // applicationToCreate.Id,
         dateFrom, dateTo, kingdom.Id);
       if (response.Status === 'ok') {   // case successful
-        const kingdomWithTerm: KingdomWithTerm = {
-          Kingdom: kingdom,
-          From: dateFrom,
-          To: dateTo,
+        const application: Application = {
+          Id: response.Body.Application.Id,
+          State: response.Body.Application.State, 
+          DateCreate: response.Body.Application.DateCreate,
+          DateSend: response.Body.Application.DateSend,
+          DateComplete: response.Body.Application.DateComplete,
+          Ruler: response.Body.Application.Ruler,
+          Creator: response.Body.Application.Creator,
+          CreatorId: response.Body.Application.CreatorRefer,
+          Moderator: response.Body.Application.Moderator,
+          ModeratorId: response.Body.Application.ModeratorRefer,
+          Check: response.Body.Application.Check,
+          KingdomsWithTerm: response.Body.Kingdoms,
         }
 
-        dispatch(UpdateKingdomFromApplication(kingdomWithTerm));
+        dispatch(SetApplicationToCreate(application));
 
         return { result: true, response }
       } else if (response.Status === 'error') {  // case error
@@ -560,11 +616,8 @@ export function useApplication() {
     applications,
     currentApplication,
     applicationToCreate,
-    applicationsCount,
-    applicationToCreateKingdomsCount,
-
+    draftApplicationId,
     applicationsAll,
-    applicationsAllCount,
     
     clearStore,
     setApplications,
@@ -575,11 +628,12 @@ export function useApplication() {
     addKingdomToApplication,
     deleteKingdomFromApplication,
     updateApplicationStatus,
+    updateApplicationStatusModerator,
     updateApplicationRuler,
     updateKingdomFromApplication,
     createApplication,
     deleteApplication,
-
+    setDraftApplicationId,
     setApplicationsAll,
 
   };

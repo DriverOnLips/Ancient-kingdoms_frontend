@@ -21,15 +21,14 @@ export class ApplicationApi {
     this.config = [
       { name: 'getApplicationsById', url: '/api/applications' },
       { name: 'getApplicationWithKingdoms', url: '/api/application/with_kingdoms' },
-      { name: 'updateApplicationStatus', url: '/api/application/status' },
+      { name: 'updateApplicationStatus', url: '/api/application/status/user' },
+      { name: 'updateApplicationStatusModerator', url: '/api/application/status/moderator' },
       { name: 'addKingdomToApplication', url: '/api/application/add_kingdom' },
       { name: 'deleteKingdomFromApplication', url: '/api/application/delete_kingdom' },
-      { name: 'createApplication', url: '/api/application/create' },
+      // { name: 'createApplication', url: '/api/application/create' },
       { name: 'deleteApplication', url: '/api/application/delete' },
       { name: 'updateApplicationRuler', url: '/api/application/update' },
       { name: 'updateKingdomFromApplication', url: '/api/application/update_kingdom' },
-      // moderator paths
-      { name: 'getAllApplications', url: '/api/applications/all' },
     ];
   }
 
@@ -117,7 +116,37 @@ export class ApplicationApi {
         });
   }
 
-  addKingdomToApplication = async (applicationId: Number, dateFrom: Date,
+  updateApplicationStatusModerator = async (applicationId: Number, state: string): Promise<ResponseDefault> => {
+    const configItem = this.config.find((item) => item.name === 'updateApplicationStatusModerator');
+    if (!configItem) {
+      throw new Error('Не найдена конфигурация для updateApplicationStatusModerator');
+    }
+
+    const headers = {
+      credenlials: 'include',
+    }
+
+    const body: ApplicationStatusRequest = {
+      Id: applicationId,
+      State: state,
+    }
+
+    return axios.put(
+      configItem.url,
+      body, 
+      {
+        headers,
+      },
+      )
+        .then((res) => {
+          return  res.data;
+        })
+        .catch((error) => {
+          return error.response.data;
+        });
+  }
+
+  addKingdomToApplication = async (dateFrom: Date,
     dateTo: Date, kingdomId: Number): Promise<ResponseDefault> => {
     const configItem = this.config.find((item) => item.name === 'addKingdomToApplication');
     if (!configItem) {
@@ -129,7 +158,7 @@ export class ApplicationApi {
     }
 
     const body: AddKingdomToApplicationRequest = {
-      ApplicationId: applicationId,
+      // ApplicationId: applicationId,
       KingdomId: kingdomId,
       From: dateFrom,
       To: dateTo,
@@ -273,7 +302,7 @@ export class ApplicationApi {
         });
   }
 
-  updateKingdomFromApplication = async (applicationId: Number, dateFrom: Date,
+  updateKingdomFromApplication = async (dateFrom: Date,
     dateTo: Date, kingdomId: Number): Promise<ResponseDefault> => {
     const configItem = this.config.find((item) => item.name === 'updateKingdomFromApplication');
     if (!configItem) {
@@ -285,7 +314,7 @@ export class ApplicationApi {
     }
 
     const body: AddKingdomToApplicationRequest = {
-      ApplicationId: applicationId,
+      // ApplicationId: applicationId,
       KingdomId: kingdomId,
       From: dateFrom,
       To: dateTo,
@@ -309,9 +338,9 @@ export class ApplicationApi {
   getAllApplications = async (status: string, dateFrom: Date | null, dateTo: Date | null): 
     Promise<ResponseDefault> => {
 
-    const configItem = this.config.find((item) => item.name === 'getAllApplications');
+    const configItem = this.config.find((item) => item.name === 'getApplicationsById');
     if (!configItem) {
-      throw new Error('Не найдена конфигурация для getAllApplications');
+      throw new Error('Не найдена конфигурация для getApplicationsById');
     }
 
     const headers = {
@@ -326,6 +355,7 @@ export class ApplicationApi {
           'Status': status,
           'From': dateFrom,
           'To': dateTo,
+          'All': 'true',
         }
       },
       )

@@ -89,37 +89,37 @@ const KingdomItem: React.FC<{ kingdom: Kingdom; inApplication: boolean, disabled
       return;
     }
 
-    if (!applicationToCreate) {
-      createApplication(dateFrom, dateTo, kingdom)
-        .then(result => {
-          if (!result.result) {
-            setModalTitle('Ошибка');
-            setModalText('Детали ошибки')
-            setModalError(result.response?.Message!);
-            setModalCanselText('Закрыть');
-            setModalVariant('');
-            setModalShow(true);
+    // if (!applicationToCreate) {
+    //   createApplication(dateFrom, dateTo, kingdom)
+    //     .then(result => {
+    //       if (!result.result) {
+    //         setModalTitle('Ошибка');
+    //         setModalText('Детали ошибки')
+    //         setModalError(result.response?.Message!);
+    //         setModalCanselText('Закрыть');
+    //         setModalVariant('');
+    //         setModalShow(true);
 
-            return;
-          }
+    //         return;
+    //       }
 
-          setModalTitle('Княжество добавлено');
-          setModalVariant('withProgress');
-          setModalShow(true);
+    //       setModalTitle('Княжество добавлено');
+    //       setModalVariant('withProgress');
+    //       setModalShow(true);
 
-          return;
-        })
+    //       return;
+    //     })
 
-        .catch(error => {
-          console.log(error)
-          setModalTitle('Ошибка');
-          setModalText('Детали ошибки')
-          setModalCanselText('Закрыть');
-          setModalError(error);
-          setModalVariant('');
-          setModalShow(true);
-        });
-    } else {
+    //     .catch(error => {
+    //       console.log(error)
+    //       setModalTitle('Ошибка');
+    //       setModalText('Детали ошибки')
+    //       setModalCanselText('Закрыть');
+    //       setModalError(error);
+    //       setModalVariant('');
+    //       setModalShow(true);
+    //     });
+    // } else {
       addKingdomToApplication(dateFrom, dateTo, kingdom)
         .then(result => {
           if (!result.result) {
@@ -147,7 +147,7 @@ const KingdomItem: React.FC<{ kingdom: Kingdom; inApplication: boolean, disabled
           setModalVariant('');
           setModalShow(true);
         });
-    }
+    // }
   }
 
   const modalUpdateKingdomFromApplication = () => {
@@ -364,7 +364,7 @@ const KingdomItem: React.FC<{ kingdom: Kingdom; inApplication: boolean, disabled
           { !inApplication ? (  // case open from feed
             <div>
               <Row className="mb-2">
-                <Button 
+                <Button variant="warning"
                   onClick={e => {
                     e.stopPropagation();
                     checkAndAddKingdomToApplication();
@@ -404,7 +404,7 @@ const KingdomItem: React.FC<{ kingdom: Kingdom; inApplication: boolean, disabled
               ) : (  // case application can be modified
                 <div>
                   <Row>
-                    <Button 
+                    <Button variant="warning"
                       onClick={e => {
                         e.stopPropagation();
                         modalUpdateKingdomFromApplication();

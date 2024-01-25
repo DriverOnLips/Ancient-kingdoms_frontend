@@ -25,11 +25,8 @@ function NavbarUser() {
   const { user, isAuthorized, isModerator, logout } = useAuth()
   const { 
     applications,
-    applicationsCount, 
     applicationToCreate,
-    applicationToCreateKingdomsCount,
     applicationsAll,
-    applicationsAllCount,
     setApplications,
     setApplicationToCreate,
     setCurrentApplication,
@@ -92,9 +89,7 @@ function NavbarUser() {
   useEffect(() => {
   }, [applications, 
     applicationToCreate, 
-    applicationToCreateKingdomsCount,
     applicationsAll,
-    applicationsAllCount,
     currentPage])
 
   if (modalShow) {
@@ -130,22 +125,17 @@ function NavbarUser() {
             <Nav className="me-auto">
               <Nav.Link className='navbar__item text-base2-medium'
               onClick={() => checkApplicationToCreate()}>
-                Создать запись { applicationToCreateKingdomsCount > 0 ? 
-                applicationToCreateKingdomsCount : 
-                <div /> }
+                Создать запись
               </Nav.Link>
               <Nav.Link className='navbar__item text-base2-medium'
               onClick={() => navigate('/application')}>
-                Мои записи { applicationsCount > 0 ? 
-                applicationsCount : 
-                <></> }
+                Мои записи
               </Nav.Link>
               { isModerator ? (
                 <>
                   <Nav.Link onClick={() => navigate('/application_moderator')}
                   className='navbar__item text-base2-medium'>
-                    Записи пользователей { applicationsAllCount > 0 ? 
-                    applicationsAllCount : <></> }
+                    Записи пользователей
                   </Nav.Link>
                   <Nav.Link onClick={() => navigate('/kingdom_moderator')}
                   className='navbar__item text-base2-medium'>

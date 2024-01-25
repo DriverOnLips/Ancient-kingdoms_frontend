@@ -127,7 +127,7 @@ const ModeratorAddAndEditKingdom: React.FC<{ add: boolean }> = ({ add }) => {
 
   const checkAndUpdateKingdom = () => {
     if (!( kingdom.Id && kingdomName && kingdomArea && kingdomCapital &&
-           kingdom.Image && kingdomDescription && kingdom.State )) {
+      (kingdomImage || kingdom.Image) && kingdomDescription && kingdom.State )) {
 
       setModalTitle('Ошибка');
       setModalText('Заполните все поля');
@@ -144,7 +144,7 @@ const ModeratorAddAndEditKingdom: React.FC<{ add: boolean }> = ({ add }) => {
       Name: kingdomName,
       Area: kingdomArea,
       Capital: kingdomCapital,
-      Image: kingdom.Image,
+      Image: kingdomImage ? kingdomImage : kingdom.Image,
       Description: kingdomDescription,
       State: kingdom.State,
     };
@@ -292,6 +292,9 @@ const ModeratorAddAndEditKingdom: React.FC<{ add: boolean }> = ({ add }) => {
             <Row style={{ justifyContent: 'center' }}>
               <Col xs={4}>
                 <Image src={kingdom.Image} alt={kingdomName} style={{ width: '100%' }} rounded />
+                <Form.Control accept=".png,.jpg,.jpeg"
+                type="file" onChange={handlePhotoChange} />
+                {preview && <Image src={preview} fluid />}
               </Col>
               <Col xs={4}>
                 <Form>
